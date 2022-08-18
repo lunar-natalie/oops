@@ -1,0 +1,20 @@
+{
+  "name": "antheia",
+  "version": "1.0.0",
+  "description": "A graphical garden",
+  "repository": "git@github.com:lunar-natalie/antheia.git",
+  "author": "Natalie Wiggins <islifepeachy@outlook.com>",
+  "license": "GPL-3.0",
+  "private": false,
+  "source": "src/index.html",
+  "scripts": {
+    "serve": "parcel --port 8080"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.4.2",
+    "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "p5": "^1.4.2"
+  }
+}
