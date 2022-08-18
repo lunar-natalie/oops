@@ -32,7 +32,7 @@ A web-based graphical demo with a theme of an animated garden **(TODO)**, using
 The server will run on http://localhost:8080. This page is accessible via a web
 browser; supported browsers include [Chromium](https://www.chromium.org/Home/)
 (version 100 and newer), and [Mozilla Firefox](https://www.mozilla.org/en-GB/firefox/)
-(version 100 an newer).
+(version 100 and newer).
 
 ### Standalone
 
