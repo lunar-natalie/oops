@@ -42,7 +42,7 @@ yarn install && yarn serve
 
 ### VS Code
 
-* Run Build Task (`Launch Chrome against localhost`)
+* Run Build Task (`Start development environment`)
     * Default keybind: `shift + ctrl/cmd + b`
 
 ## Code structure
