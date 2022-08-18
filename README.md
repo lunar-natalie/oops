@@ -49,8 +49,10 @@ yarn install && yarn serve
 
 * Written in TypeScript, HTML, and CSS
 * Built and run using [Yarn](https://yarnpkg.com/) and [Parcel](https://parceljs.org/)
-* Lines no longer than 80 characters, unless readability is affected
-* Source code located in `src/`
+* Lines are no longer than 80 characters, unless readability is affected
+* Tab width is 4 spaces, excluding generated files such as `package.json` in
+  which the default of a given tool is used
+* Source code is located in `src/`
 
 ## Debugging
 
