@@ -3,7 +3,7 @@ import p5 from 'p5';
 const sketch = (p: p5) => {
     p.setup = () => {
         p.createCanvas(window.innerWidth, window.innerHeight);
-        window.onresize = (ev: UIEvent) => {
+        window.onresize = () => {
             p.resizeCanvas(window.innerWidth, window.innerHeight);
         };
     };
