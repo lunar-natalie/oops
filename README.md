@@ -1,7 +1,7 @@
 # Antheia
 
 A web-based graphical demo with a theme of an animated garden **(TODO)**, using
-[TypeScript](https://www.typescriptlang.org/) and [P5.js](https://p5js.org/).
+[TypeScript](https://www.typescriptlang.org/) and [p5.js](https://p5js.org/).
 
 ## Table of contents
 
@@ -53,6 +53,7 @@ yarn install && yarn serve
 * Tab width is 4 spaces, excluding generated files such as `package.json` in
   which the default of a given tool is used
 * Source code is located in `src/`
+* Uses [JSDoc](https://jsdoc.app/) comments
 
 ## Debugging
 
@@ -83,5 +84,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 Written by Natalie Wiggins.
+
+Various assets and public domain resources are exempt from this license.
 
 See `LICENSE` and `AUTHORS` for more information.
