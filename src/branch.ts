@@ -106,6 +106,8 @@ export class Branch implements Drawable {
 
         // Draw children.
         if (this.children.length > 1) {
+            // TODO(Natalie): Fix vertical gaps.
+
             let translationBase = this.attribs.length + this.attribs.radius;
             if (this.attribs.angleDeviation) {
                 translationBase /= p.PI / this.attribs.angleDeviation;
