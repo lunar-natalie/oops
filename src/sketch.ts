@@ -38,11 +38,9 @@ export default class Sketch {
         this.objects = [];
         // Draw trees.
         let translations: Vector[] = [];
-        let trunkHeight = 200;
         for (let i = 0; i < 20;) {
-            let baseTranslateZ = Math.random() * p.height * 4;
-            let minLength = 4 + (baseTranslateZ * 0.005);
-
+            let trunkHeight = 100 + (Math.random() * 200);
+            let baseTranslateZ = 100 + (Math.random() * p.height * 8);
             let translation = new Vector(
                 (Math.random() - 0.5) * p.width * 2,
                 (p.height / 2) - (trunkHeight / 2),
@@ -52,13 +50,13 @@ export default class Sketch {
                 break;
 
             this.objects.push(new Branch({
-                radius: 4,
+                radius: 2 + (Math.random() * 4),
                 length: trunkHeight,
-                minLength: minLength,
+                minLength: 4 + (baseTranslateZ * 0.005),
                 color: { red: 255, green: 255, blue: 255 },
                 altColor: { red: 0, green: 255, blue: 255 },
-                minLengthAltColor: 20,
-                angleDeviation: p.PI / 4,
+                minLengthAltColor: 10 + (Math.random() * 70),
+                angleDeviation: p.PI / (3 + (Math.random() * 8)),
                 lengthMultiplier: 2 / 3,
                 radiusMultiplier: 2 / 3
             }, translation));
@@ -78,7 +76,7 @@ export default class Sketch {
         p.background(0);
 
         // Configure 3D controls.
-        p.orbitControl(5, 5, 0.01);
+        p.orbitControl(5, 5, 0.05);
 
         // Draw objects.
         this.objects.forEach(function (object, _index, _array): void {
