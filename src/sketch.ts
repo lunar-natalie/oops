@@ -7,7 +7,7 @@ import p5, { Vector } from "p5";
  * Canvas handler.
  */
 export default class Sketch {
-    /** Objects to be drawn on the canvas. */
+    /** Pre-configured objects to be drawn on the canvas. */
     objects: Drawable[];
 
     /**
@@ -36,32 +36,42 @@ export default class Sketch {
      */
     private createObjects(p: p5): void {
         this.objects = [];
+
         // Draw trees.
         let translations: Vector[] = [];
-        for (let i = 0; i < 20;) {
-            let trunkHeight = 100 + (Math.random() * 200);
-            let baseTranslateZ = 100 + (Math.random() * p.height * 8);
-            let translation = new Vector(
-                (Math.random() - 0.5) * p.width * 2,
-                (p.height / 2) - (trunkHeight / 2),
-                -baseTranslateZ
-            );
-            if (translations.indexOf(translation) != -1)
-                break;
+        for (let orientZ = 1; orientZ >= -1; orientZ -= 2) {
+            for (let orientX = 1; orientX >= -1; orientX -= 2) {
+                for (let i = 0; i < 10;) {
+                    let trunkHeight = 100 + (Math.random() * 200);
+                    let baseTranslateZ = 200 + (Math.random() * p.height * 6);
+                    let translation = new Vector(
+                        orientX * ((Math.random() - 0.5) * p.width * 2),
+                        (p.height / 2) - (trunkHeight / 2),
+                        orientZ * baseTranslateZ
+                    );
+                    if (translations.indexOf(translation) != -1)
+                        continue;
+                    translations.push(translation);
 
-            this.objects.push(new Branch({
-                radius: 2 + (Math.random() * 4),
-                length: trunkHeight,
-                minLength: 4 + (baseTranslateZ * 0.005),
-                color: { red: 255, green: 255, blue: 255 },
-                altColor: { red: 0, green: 255, blue: 255 },
-                minLengthAltColor: 10 + (Math.random() * 70),
-                angleDeviation: p.PI / (3 + (Math.random() * 8)),
-                lengthMultiplier: 2 / 3,
-                radiusMultiplier: 2 / 3
-            }, translation));
+                    this.objects.push(new Branch({
+                        radius: 4 + (Math.random() * 2),
+                        length: trunkHeight,
+                        minLength: 4 + (baseTranslateZ * 0.01),
+                        color: { red: 200, green: 200, blue: 200 },
+                        altColor: {
+                            red: 200 + Math.random() * 55,
+                            green: 0,
+                            blue: 200 + Math.random() * 55
+                        },
+                        minLengthAltColor: 10 + (Math.random() * 70),
+                        angleDeviation: p.PI / (3 + (Math.random() * 8)),
+                        lengthMultiplier: 2 / 3,
+                        radiusMultiplier: 2 / 3
+                    }, translation));
 
-            ++i;
+                    ++i;
+                }
+            }
         }
     }
 
@@ -72,16 +82,26 @@ export default class Sketch {
      * @param p p5 instance.
      */
     private draw(p: p5): void {
-        // Set background to black.
-        p.background(0);
+        // TODO(Natalie): Gradient sky.
+        p.background('#000000');
 
         // Configure 3D controls.
         p.orbitControl(5, 5, 0.05);
 
-        // Draw objects.
+        // Draw pre-configured objects.
         this.objects.forEach(function (object, _index, _array): void {
             object.draw(p);
         });
+
+        // Draw ground.
+        // TODO(Natalie): Base ground dimensions on tree positioning in createObjects().
+        p.noStroke();
+        p.fill(10, 50, 10);
+        p.translate(-p.width, p.height / 2)
+        p.box(400 + p.width * 12, 100, 400 + p.height * 12);
+
+        // TODO(Natalie): Animated clouds.
+        // TODO(Natalie): Lighting.
     }
 
     /**

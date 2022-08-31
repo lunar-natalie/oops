@@ -49,9 +49,12 @@ export interface BranchAttributes {
  * Drawable canvas object represented by a cylinder and its children.
  */
 export class Branch implements Drawable {
-    attribs: BranchAttributes;
-    children: Branch[];
-    initialTranslation?: Vector;
+    readonly attribs: BranchAttributes;
+    readonly children: Branch[];
+    readonly initialTranslation?: Vector;
+
+    // TODO(Natalie): Prevent call stack limit from crashing program.
+    // TODO(Natalie): Fix vertical and horizontal gaps between branches.
 
     /**
      * Creates a new branch and recursively creates its children from each of
@@ -74,6 +77,7 @@ export class Branch implements Drawable {
             if (this.attribs.radiusMultiplier) {
                 childAttribs.radius *= this.attribs.radiusMultiplier;
             }
+
             for (let i = 0; i < 2; ++i) {
                 this.children.push(new Branch(childAttribs));
             }
@@ -81,7 +85,8 @@ export class Branch implements Drawable {
     }
 
     /**
-     * Draws the branch and its children onto the canvas.
+     * Draws the branch and its children onto the canvas. Preserves drawing
+     * configuration and transformations.
      * @param p p5 instance.
      */
     draw(p: p5): void {
@@ -104,10 +109,8 @@ export class Branch implements Drawable {
         p.fill(color.red, color.green, color.blue, color.alpha);
         p.cylinder(this.attribs.radius, this.attribs.length);
 
-        // Draw children.
         if (this.children.length > 1) {
-            // TODO(Natalie): Fix vertical gaps.
-
+            // Translation hack.
             let translationBase = this.attribs.length + this.attribs.radius;
             if (this.attribs.angleDeviation) {
                 translationBase /= p.PI / this.attribs.angleDeviation;
@@ -117,29 +120,34 @@ export class Branch implements Drawable {
             p.push();
             p.translate(0, -this.attribs.length + translationBase);
 
-            // Update x-coordinate and draw next branch.
-            p.push();
-            p.translate(translationBase, 0);
-            if (this.attribs.angleDeviation) {
-                p.rotateZ(this.attribs.angleDeviation);
-            }
-            this.children[0].draw(p);
-            p.pop();
-
-            // Update x-coordinate and draw alternate branch.
-            p.push();
-            p.translate(-translationBase, 0);
-            if (this.attribs.angleDeviation) {
-                p.rotateZ(-this.attribs.angleDeviation);
-            }
-            this.children[1].draw(p);
-            p.pop();
+            // Draw children.
+            this.drawChild(p, 0, translationBase, this.attribs.angleDeviation);
+            this.drawChild(p, 1, -translationBase, -this.attribs.angleDeviation);
 
             // Restore y-coordinate.
             p.pop();
         }
 
         // Restore position and color.
+        p.pop();
+    }
+
+    /**
+     * Draws a child branch. Preserves drawing configuration and
+     * transformations.
+     * @param p p5 instance.
+     * @param index Index of child in the children array.
+     * @param translateX Quantity to translate the child by on the x-axis.
+     * @param angleDeviation Angle to deviate from the previously drawn branch
+     * by, in p5's current angle unit (set by p5.angleMode(), radians by
+     * default).
+     */
+    private drawChild(p: p5, index: number, translateX: number,
+        angleDeviation: number): void {
+        p.push();
+        p.translate(translateX, 0);
+        p.rotateZ(angleDeviation);
+        this.children[index].draw(p);
         p.pop();
     }
 }
