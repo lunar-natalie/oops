@@ -27,6 +27,12 @@ export interface BranchAttributes {
     minLengthAltColor?: number;
 
     /**
+     * Angle to deviate from the previously drawn branch by, in p5's current
+     * angle unit (set by p5.angleMode(), radians by default).
+     */
+    angleDeviation: number;
+
+    /**
      * Number to multiply the length of the previously drawn branch by for the
      * next.
      */
@@ -37,12 +43,6 @@ export interface BranchAttributes {
      * next.
      */
     radiusMultiplier?: number;
-
-    /**
-     * Angle to deviate from the previously drawn branch by, in p5's current
-     * angle unit (set by p5.angleMode(), radians by default).
-     */
-    angleDeviation?: number;
 }
 
 /**
@@ -101,31 +101,34 @@ export class Branch implements Drawable {
         } else {
             color = this.attribs.color;
         }
-        p.fill(color.red, color.blue, color.green, color.alpha);
+        p.fill(color.red, color.green, color.blue, color.alpha);
         p.cylinder(this.attribs.radius, this.attribs.length);
 
         // Draw children.
         if (this.children.length > 1) {
-            let translationModifier = (this.attribs.length + this.attribs.radius) / 4;
+            let translationBase = this.attribs.length + this.attribs.radius;
+            if (this.attribs.angleDeviation) {
+                translationBase /= p.PI / this.attribs.angleDeviation;
+            }
 
             // Update y-coordinate.
             p.push();
-            p.translate(0, -this.attribs.length + translationModifier);
+            p.translate(0, -this.attribs.length + translationBase);
 
             // Update x-coordinate and draw next branch.
             p.push();
-            p.translate(translationModifier, 0);
+            p.translate(translationBase, 0);
             if (this.attribs.angleDeviation) {
-                p.rotate(this.attribs.angleDeviation);
+                p.rotateZ(this.attribs.angleDeviation);
             }
             this.children[0].draw(p);
             p.pop();
 
             // Update x-coordinate and draw alternate branch.
             p.push();
-            p.translate(-translationModifier, 0);
+            p.translate(-translationBase, 0);
             if (this.attribs.angleDeviation) {
-                p.rotate(-this.attribs.angleDeviation);
+                p.rotateZ(-this.attribs.angleDeviation);
             }
             this.children[1].draw(p);
             p.pop();

@@ -35,21 +35,36 @@ export default class Sketch {
      * @param p p5 instance.
      */
     private createObjects(p: p5): void {
+        this.objects = [];
+        // Draw trees.
+        let translations: Vector[] = [];
         let trunkHeight = 200;
-        this.objects = [
-            // Tree.
-            new Branch({
+        for (let i = 0; i < 20;) {
+            let baseTranslateZ = Math.random() * p.height * 4;
+            let minLength = 4 + (baseTranslateZ * 0.005);
+
+            let translation = new Vector(
+                (Math.random() - 0.5) * p.width * 2,
+                (p.height / 2) - (trunkHeight / 2),
+                -baseTranslateZ
+            );
+            if (translations.indexOf(translation) != -1)
+                break;
+
+            this.objects.push(new Branch({
                 radius: 4,
                 length: trunkHeight,
-                minLength: 4,
+                minLength: minLength,
                 color: { red: 255, green: 255, blue: 255 },
                 altColor: { red: 0, green: 255, blue: 255 },
                 minLengthAltColor: 20,
+                angleDeviation: p.PI / 4,
                 lengthMultiplier: 2 / 3,
-                radiusMultiplier: 2 / 3,
-                angleDeviation: p.PI / 4
-            }, new Vector(0, (p.height / 2) - (trunkHeight / 2)))
-        ];
+                radiusMultiplier: 2 / 3
+            }, translation));
+
+            ++i;
+        }
     }
 
     /**
@@ -64,7 +79,6 @@ export default class Sketch {
 
         // Configure 3D controls.
         p.orbitControl(5, 5, 0.01);
-        p.rotateY(0.5);
 
         // Draw objects.
         this.objects.forEach(function (object, _index, _array): void {
