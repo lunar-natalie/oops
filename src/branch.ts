@@ -50,10 +50,11 @@ export interface BranchAttributes {
  */
 export class Branch implements Drawable {
     readonly attribs: BranchAttributes;
-    readonly children: Branch[];
     readonly initialTranslation?: Vector;
+    readonly children: Branch[];
 
-    // TODO(Natalie): Improve branch placement.
+    // TODO(Natalie): Improve branch placement to prevent overlap and gaps
+    // between children outside of a specific range of attributes.
     // TODO(Natalie): Prevent call stack limit from crashing program
     // (attribute dependent).
     // TODO(Natalie): Add option to draw branches on multiple axes.
