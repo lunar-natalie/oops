@@ -15,7 +15,7 @@ export default class Sketch {
 
     minTreeZ = 200;
     maxTreeZOffset: number;
-    backgroundColorValue = '#644063';
+    backgroundColorValue = "#644063";
 
     /**
      * Sets the setup() and draw() methods on a p5 instance.
@@ -68,7 +68,7 @@ export default class Sketch {
             width: skyboxWidth,
             height: this.maxTreeZOffset / 2,
             colorFrom: p.color(this.backgroundColorValue),
-            colorTo: p.color('#000000'),
+            colorTo: p.color("#000000"),
             axis: Axis.Y
         }
         this.objects.push(new LinearGradient(skyboxAttribs,
