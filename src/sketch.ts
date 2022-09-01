@@ -46,7 +46,7 @@ export default class Sketch {
         this.objects = [];
 
         // TODO(Natalie): Ground.
-        // TODO(Natalie): Base ground dimensions on tree positioning in createObjects().
+        // TODO(Natalie): Base ground dimensions on tree positioning.
         let groundWidthDepth = 2 * (this.minTreeZ + this.maxTreeZOffset);
         let groundLength = 100;
         this.objects.push(new Ground({
@@ -85,13 +85,17 @@ export default class Sketch {
         for (let orientZ = 1; orientZ >= -1; orientZ -= 2) {
             for (let orientX = 1; orientX >= -1; orientX -= 2) {
                 for (let i = 0; i < 10;) {
-                    let trunkHeight = 100 + (Math.random() * 200);
-                    let baseTranslateZ = 200 + (Math.random() * this.maxTreeZOffset);
+                    let trunkHeight =
+                        100 + (Math.random() * 200);
+                    let baseTranslateZ =
+                        200 + (Math.random() * this.maxTreeZOffset);
+
                     let translation = new Vector(
                         orientX * ((Math.random() - 0.5) * p.width * 2),
                         (p.height / 2) - (trunkHeight / 2),
                         orientZ * baseTranslateZ
                     );
+
                     if (translations.indexOf(translation) != -1)
                         continue;
                     translations.push(translation);
