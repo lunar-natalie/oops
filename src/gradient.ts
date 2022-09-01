@@ -41,7 +41,8 @@ export class LinearGradient implements Drawable {
      * @param translation Translation to apply on the canvas.
      * @param rotation Rotation to apply on the canvas.
      */
-    constructor(attribs: LinearGradientAttributes, translation?: Vector, rotation?: Vector) {
+    constructor(attribs: LinearGradientAttributes, translation?: Vector,
+        rotation?: Vector) {
         this.attribs = attribs;
         this.translation = translation;
         this.rotation = rotation;
@@ -68,26 +69,42 @@ export class LinearGradient implements Drawable {
         p.noFill();
         // TODO(Natalie): Optimize.
         if (this.attribs.axis === Axis.Y) {
-            for (let y = this.attribs.startY; y <= this.attribs.startY + this.attribs.height; ++y) {
+            for (let y = this.attribs.startY;
+                y <= this.attribs.startY + this.attribs.height; ++y) {
                 let inter = p.map(y,
                     this.attribs.startY,
                     this.attribs.startY + this.attribs.height,
                     0,
                     1);
-                let color = p.lerpColor(this.attribs.colorFrom, this.attribs.colorTo, inter);
+
+                let color = p.lerpColor(this.attribs.colorFrom,
+                    this.attribs.colorTo,
+                    inter);
+
                 p.stroke(color);
-                p.line(this.attribs.startX, y, this.attribs.startX + this.attribs.width, y);
+                p.line(this.attribs.startX,
+                    y,
+                    this.attribs.startX + this.attribs.width,
+                    y);
             }
         } else if (this.attribs.axis === Axis.X) {
-            for (let x = this.attribs.startX; x <= this.attribs.startY + this.attribs.width; ++x) {
+            for (let x = this.attribs.startX;
+                x <= this.attribs.startX + this.attribs.width; ++x) {
                 let inter = p.map(x,
                     this.attribs.startX,
                     this.attribs.startX + this.attribs.width,
                     0,
                     1);
-                let color = p.lerpColor(this.attribs.colorFrom, this.attribs.colorTo, inter);
+
+                let color = p.lerpColor(this.attribs.colorFrom,
+                    this.attribs.colorTo,
+                    inter);
+
                 p.stroke(color);
-                p.line(x, this.attribs.startY, x, this.attribs.startY + this.attribs.height);
+                p.line(x,
+                    this.attribs.startY,
+                    x,
+                    this.attribs.startY + this.attribs.height);
             }
         }
 
