@@ -13,6 +13,7 @@ A web-based graphical demo with a theme of an animated garden **(TODO)**, using
         * [Standalone](#standalone)
         * [VS Code](#vs-code)
     * [Code structure](#code-structure)
+    * [Locale](#locale)
     * [Debugging](#debugging)
         * [Additional dependencies](#additional-dependencies)
         * [VS Code](#vs-code-1)
@@ -54,6 +55,11 @@ yarn install && yarn serve
   which the default of a given tool is used
 * Source code is located in `src/`
 * Uses [JSDoc](https://jsdoc.app/) comments
+
+## Locale
+
+Documentation and code symbols are currently written in United States English in
+order to adhere to international standards and framework interfaces.
 
 ## Debugging
 
