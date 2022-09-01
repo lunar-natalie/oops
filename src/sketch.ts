@@ -1,4 +1,7 @@
+import { Axis } from "./axis";
 import { Branch } from "./branch";
+import { Ground } from "./ground";
+import { LinearGradient, LinearGradientAttributes } from "./gradient";
 import Drawable from "./drawable";
 
 import p5, { Vector } from "p5";
@@ -9,6 +12,10 @@ import p5, { Vector } from "p5";
 export default class Sketch {
     /** Pre-configured objects to be drawn on the canvas. */
     objects: Drawable[];
+
+    minTreeZ = 200;
+    maxTreeZOffset: number;
+    backgroundColorValue = '#644063';
 
     /**
      * Sets the setup() and draw() methods on a p5 instance.
@@ -27,23 +34,58 @@ export default class Sketch {
     private setup(p: p5): void {
         p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
         window.onresize = () => this.onresize(p);
+        this.maxTreeZOffset = p.height * 6;
         this.createObjects(p);
     }
 
     /**
-     * Creates drawable objects.
+     * (Re)creates drawable objects.
      * @param p p5 instance.
      */
     private createObjects(p: p5): void {
         this.objects = [];
 
-        // Draw trees.
+        // TODO(Natalie): Ground.
+        // TODO(Natalie): Base ground dimensions on tree positioning in createObjects().
+        let groundWidthDepth = 2 * (this.minTreeZ + this.maxTreeZOffset);
+        let groundLength = 100;
+        this.objects.push(new Ground({
+            colorAttribs: { red: 10, green: 50, blue: 10 },
+            translation: new Vector(
+                -p.width,
+                p.height / 2
+            ),
+            width: groundWidthDepth,
+            length: groundLength,
+            depth: groundWidthDepth
+        }));
+
+        // TODO(Natalie): Skybox.
+        let skyboxWidth = 2 * (this.minTreeZ + this.maxTreeZOffset);
+        let skyboxAttribs: LinearGradientAttributes = {
+            startX: 0,
+            startY: 0,
+            width: skyboxWidth,
+            height: this.maxTreeZOffset / 2,
+            colorFrom: p.color(this.backgroundColorValue),
+            colorTo: p.color('#000000'),
+            axis: Axis.Y
+        }
+        this.objects.push(new LinearGradient(skyboxAttribs,
+            new Vector(
+                -0,
+                -1500,
+                -this.minTreeZ - this.maxTreeZOffset
+            ))
+        )
+
+        // Trees.
         let translations: Vector[] = [];
         for (let orientZ = 1; orientZ >= -1; orientZ -= 2) {
             for (let orientX = 1; orientX >= -1; orientX -= 2) {
                 for (let i = 0; i < 10;) {
                     let trunkHeight = 100 + (Math.random() * 200);
-                    let baseTranslateZ = 200 + (Math.random() * p.height * 6);
+                    let baseTranslateZ = 200 + (Math.random() * this.maxTreeZOffset);
                     let translation = new Vector(
                         orientX * ((Math.random() - 0.5) * p.width * 2),
                         (p.height / 2) - (trunkHeight / 2),
@@ -57,8 +99,8 @@ export default class Sketch {
                         radius: 4 + (Math.random() * 2),
                         length: trunkHeight,
                         minLength: 4 + (baseTranslateZ * 0.01),
-                        color: { red: 200, green: 200, blue: 200 },
-                        altColor: {
+                        colorAttribs: { red: 200, green: 200, blue: 200 },
+                        altColorAttribs: {
                             red: 200 + Math.random() * 55,
                             green: 0,
                             blue: 200 + Math.random() * 55
@@ -82,8 +124,7 @@ export default class Sketch {
      * @param p p5 instance.
      */
     private draw(p: p5): void {
-        // TODO(Natalie): Gradient sky.
-        p.background('#000000');
+        p.background(this.backgroundColorValue);
 
         // Configure 3D controls.
         p.orbitControl(5, 5, 0.05);
@@ -92,13 +133,6 @@ export default class Sketch {
         this.objects.forEach(function (object, _index, _array): void {
             object.draw(p);
         });
-
-        // Draw ground.
-        // TODO(Natalie): Base ground dimensions on tree positioning in createObjects().
-        p.noStroke();
-        p.fill(10, 50, 10);
-        p.translate(-p.width, p.height / 2)
-        p.box(400 + p.width * 12, 100, 400 + p.height * 12);
 
         // TODO(Natalie): Animated clouds.
         // TODO(Natalie): Lighting.

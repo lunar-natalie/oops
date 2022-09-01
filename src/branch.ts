@@ -1,4 +1,4 @@
-import Color from "./color";
+import ColorAttributes from "./color";
 import Drawable from "./drawable";
 
 import p5, { Vector } from "p5";
@@ -20,10 +20,10 @@ export interface BranchAttributes {
     minLength: number;
 
     /** Color to fill the cylinder representing the branch with. */
-    color: Color;
+    colorAttribs: ColorAttributes;
 
     /** Color to fill children of a certain length and below with. */
-    altColor?: Color;
+    altColorAttribs?: ColorAttributes;
     minLengthAltColor?: number;
 
     /**
@@ -53,8 +53,10 @@ export class Branch implements Drawable {
     readonly children: Branch[];
     readonly initialTranslation?: Vector;
 
-    // TODO(Natalie): Prevent call stack limit from crashing program.
-    // TODO(Natalie): Fix vertical and horizontal gaps between branches.
+    // TODO(Natalie): Improve branch placement.
+    // TODO(Natalie): Prevent call stack limit from crashing program
+    // (attribute dependent).
+    // TODO(Natalie): Add option to draw branches on multiple axes.
 
     /**
      * Creates a new branch and recursively creates its children from each of
@@ -99,33 +101,20 @@ export class Branch implements Drawable {
 
         // Draw current branch.
         p.noStroke();
-        let color: Color;
-        if (this.attribs.altColor && this.attribs.minLengthAltColor
+        let colorAttribs: ColorAttributes;
+        if (this.attribs.altColorAttribs && this.attribs.minLengthAltColor
             && this.attribs.length <= this.attribs.minLengthAltColor) {
-            color = this.attribs.altColor
+            colorAttribs = this.attribs.altColorAttribs
         } else {
-            color = this.attribs.color;
+            colorAttribs = this.attribs.colorAttribs;
         }
-        p.fill(color.red, color.green, color.blue, color.alpha);
+        p.fill(colorAttribs.red, colorAttribs.green, colorAttribs.blue, colorAttribs.alpha);
         p.cylinder(this.attribs.radius, this.attribs.length);
 
         if (this.children.length > 1) {
-            // Translation hack.
-            let translationBase = this.attribs.length + this.attribs.radius;
-            if (this.attribs.angleDeviation) {
-                translationBase /= p.PI / this.attribs.angleDeviation;
-            }
-
-            // Update y-coordinate.
-            p.push();
-            p.translate(0, -this.attribs.length + translationBase);
-
             // Draw children.
-            this.drawChild(p, 0, translationBase, this.attribs.angleDeviation);
-            this.drawChild(p, 1, -translationBase, -this.attribs.angleDeviation);
-
-            // Restore y-coordinate.
-            p.pop();
+            this.drawChild(p, 0, this.attribs.angleDeviation);
+            this.drawChild(p, 1, -this.attribs.angleDeviation);
         }
 
         // Restore position and color.
@@ -137,16 +126,17 @@ export class Branch implements Drawable {
      * transformations.
      * @param p p5 instance.
      * @param index Index of child in the children array.
-     * @param translateX Quantity to translate the child by on the x-axis.
      * @param angleDeviation Angle to deviate from the previously drawn branch
      * by, in p5's current angle unit (set by p5.angleMode(), radians by
      * default).
      */
-    private drawChild(p: p5, index: number, translateX: number,
-        angleDeviation: number): void {
+    private drawChild(p: p5, index: number, angleDeviation: number): void {
+        let xTranslationBase = -(
+            (this.attribs.length * this.attribs.lengthMultiplier) / 2);
         p.push();
-        p.translate(translateX, 0);
+        p.translate(0, xTranslationBase);
         p.rotateZ(angleDeviation);
+        p.translate(0, xTranslationBase);
         this.children[index].draw(p);
         p.pop();
     }
