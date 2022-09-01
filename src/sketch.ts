@@ -80,6 +80,7 @@ export default class Sketch {
         )
 
         // Trees.
+        // TODO(Natalie): Extend drawing to left and right of the initial camera.
         let translations: Vector[] = [];
         for (let orientZ = 1; orientZ >= -1; orientZ -= 2) {
             for (let orientX = 1; orientX >= -1; orientX -= 2) {

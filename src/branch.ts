@@ -58,6 +58,7 @@ export class Branch implements Drawable {
     // TODO(Natalie): Prevent call stack limit from crashing program
     // (attribute dependent).
     // TODO(Natalie): Add option to draw branches on multiple axes.
+    // TODO(Natalie): Improve performance.
 
     /**
      * Creates a new branch and recursively creates its children from each of
