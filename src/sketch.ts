@@ -17,8 +17,10 @@ export default class Sketch {
 
     minTreeZ = 200;
     maxTreeZOffset: number;
+
     titleFont: Font;
-    subtitleFont: Font;
+    normalFont: Font;
+
     backgroundColorValue = "#644063";
 
     /**
@@ -33,7 +35,7 @@ export default class Sketch {
 
     private preload(p: p5): void {
         this.titleFont = p.loadFont("fonts/noto/NotoSansMono-Bold.ttf");
-        this.subtitleFont = p.loadFont("fonts/noto/NotoSansMono-Regular.ttf");
+        this.normalFont = p.loadFont("fonts/noto/NotoSansMono-Regular.ttf");
     }
 
     /**
@@ -61,10 +63,14 @@ export default class Sketch {
         let titleSize = p.height / 20;
         let titleStartX = (-titleContent.length * titleSize) / 4;
         let titleStartY = titleSize - (p.height / 4);
-        let labelContent = "A graphical demo of a psuedo-randomly generated garden.";
-        let labelSize = titleSize / 2;
+        let subtitleContent = "A graphical demo of a psuedo-randomly generated garden.";
+        let subtitleSize = titleSize / 2;
+        let subtitleStartX = (-subtitleContent.length * subtitleSize) / 4;
+        let subtitleStartY = titleStartY + titleSize;
+        let labelContent = "Click and drag to rotate the camera. Scroll to zoom.";
+        let labelSize = subtitleSize / 2;
         let labelStartX = (-labelContent.length * labelSize) / 4;
-        let labelStartY = titleStartY + labelSize + 12;
+        let labelStartY = subtitleStartY + subtitleSize;
         this.objects.push(new Text({
             content: titleContent,
             font: this.titleFont,
@@ -74,12 +80,20 @@ export default class Sketch {
             fillColorAttribs: {red: 255, green: 255, blue: 255}
         }));
         this.objects.push(new Text({
+            content: subtitleContent,
+            font: this.normalFont,
+            startX: subtitleStartX,
+            startY: subtitleStartY,
+            size: subtitleSize,
+            fillColorAttribs: {red: 255, green: 255, blue: 255}
+        }));
+        this.objects.push(new Text({
             content: labelContent,
-            font: this.subtitleFont,
+            font: this.normalFont,
             startX: labelStartX,
             startY: labelStartY,
             size: labelSize,
-            fillColorAttribs: {red: 255, green: 255, blue: 255}
+            fillColorAttribs: { red: 255, green: 255, blue: 255 }
         }));
 
         // Ground.
