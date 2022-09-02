@@ -46,7 +46,7 @@ export class Ground implements Drawable {
             this.attribs.colorAttribs.blue,
             this.attribs.colorAttribs.alpha);
         p.translate(this.attribs.translation);
-        p.box(this.attribs.width, this.attribs.length, this.attribs.depth);
+        p.box(this.attribs.width, this.attribs.depth, this.attribs.length);
 
         p.pop();
     }

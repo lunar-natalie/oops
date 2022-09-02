@@ -32,20 +32,21 @@ export interface LinearGradientAttributes {
  */
 export class LinearGradient implements Drawable {
     readonly attribs: LinearGradientAttributes;
-    readonly translation?: Vector;
-    readonly rotation?: Vector;
+    readonly translateZ?: number;
+    readonly rotateY?: number;
 
     /**
      * Creates a new linear gradient.
      * @param attribs Attributes for drawing.
-     * @param translation Translation to apply on the canvas.
-     * @param rotation Rotation to apply on the canvas.
+     * @param translatezZ Quantity to translate by on the z-axis.
+     * @param rotateY Angle to rotate on the y-axis before drawing, in p5's
+     * current angle unit (set by p5.angleMode(), radians by default).
      */
-    constructor(attribs: LinearGradientAttributes, translation?: Vector,
-        rotation?: Vector) {
+    constructor(attribs: LinearGradientAttributes, translatezZ?: number,
+        rotateY?: number) {
         this.attribs = attribs;
-        this.translation = translation;
-        this.rotation = rotation;
+        this.translateZ = translatezZ;
+        this.rotateY = rotateY;
     }
 
     /**
@@ -56,14 +57,12 @@ export class LinearGradient implements Drawable {
     draw(p: p5): void {
         p.push();
 
-        if (this.translation) {
-            p.translate(this.translation);
+        if (this.rotateY) {
+            p.rotateY(this.rotateY);
         }
 
-        if (this.rotation) {
-            p.rotateX(this.rotation.x);
-            p.rotateY(this.rotation.y);
-            p.rotateZ(this.rotation.z);
+        if (this.translateZ) {
+            p.translate(0, 0, this.translateZ);
         }
 
         p.noFill();

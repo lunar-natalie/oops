@@ -2,9 +2,10 @@ import { Axis } from "./axis";
 import { Branch } from "./branch";
 import { Ground } from "./ground";
 import { LinearGradient, LinearGradientAttributes } from "./gradient";
+import { Text } from "./text";
 import Drawable from "./drawable";
 
-import p5, { Vector } from "p5";
+import p5, { Font, Vector } from "p5";
 
 /**
  * Canvas handler.
@@ -15,15 +16,23 @@ export default class Sketch {
 
     minTreeZ = 200;
     maxTreeZOffset: number;
+    titleFont: Font;
+    subtitleFont: Font;
     backgroundColorValue = "#644063";
 
     /**
-     * Sets the setup() and draw() methods on a p5 instance.
+     * Sets the preload(), setup(), and draw() methods on a p5 instance.
      * @param p p5 instance.
      */
     constructor(p: p5) {
+        p.preload = () => this.preload(p);
         p.setup = () => this.setup(p);
         p.draw = () => this.draw(p);
+    }
+
+    private preload(p: p5): void {
+        this.titleFont = p.loadFont("fonts/noto/NotoSansMono-Bold.ttf");
+        this.subtitleFont = p.loadFont("fonts/noto/NotoSansMono-Regular.ttf");
     }
 
     /**
@@ -45,42 +54,71 @@ export default class Sketch {
     private createObjects(p: p5): void {
         this.objects = [];
 
-        // TODO(Natalie): Ground.
-        // TODO(Natalie): Base ground dimensions on tree positioning.
-        let groundWidthDepth = 2 * (this.minTreeZ + this.maxTreeZOffset);
-        let groundLength = 100;
+        // Title.
+        // TODO(Natalie): Properly horizontally center text.
+        let titleContent = "Welcome to Antheia";
+        let titleSize = p.height / 20;
+        let titleStartX = (-titleContent.length * titleSize) / 4;
+        let titleStartY = titleSize - (p.height / 4);
+        let labelContent = "A graphical demo of a psuedo-randomly generated garden.";
+        let labelSize = titleSize / 2;
+        let labelStartX = (-labelContent.length * labelSize) / 4;
+        let labelStartY = titleStartY + labelSize + 12;
+        this.objects.push(new Text({
+            content: titleContent,
+            font: this.titleFont,
+            startX: titleStartX,
+            startY: titleStartY,
+            size: titleSize,
+            fillColorAttribs: {red: 255, green: 255, blue: 255}
+        }));
+        this.objects.push(new Text({
+            content: labelContent,
+            font: this.subtitleFont,
+            startX: labelStartX,
+            startY: labelStartY,
+            size: labelSize,
+            fillColorAttribs: {red: 255, green: 255, blue: 255}
+        }));
+
+        // Ground.
+        let groundWidthLength = 2 * (this.minTreeZ + this.maxTreeZOffset);
+        let groundDepth = 100;
         this.objects.push(new Ground({
             colorAttribs: { red: 10, green: 50, blue: 10 },
             translation: new Vector(
-                -p.width,
+                0,
                 p.height / 2
             ),
-            width: groundWidthDepth,
-            length: groundLength,
-            depth: groundWidthDepth
+            width: groundWidthLength,
+            length: groundWidthLength,
+            depth: groundDepth
         }));
 
-        // TODO(Natalie): Skybox.
+        // Skybox.
+        // TODO(Natalie): Fix corner rendering glitches on camera rotation.
         let skyboxWidth = 2 * (this.minTreeZ + this.maxTreeZOffset);
         let skyboxAttribs: LinearGradientAttributes = {
-            startX: 0,
-            startY: 0,
+            startX: -skyboxWidth / 2,
+            startY: -1500 - groundDepth,
             width: skyboxWidth,
             height: this.maxTreeZOffset / 2,
             colorFrom: p.color(this.backgroundColorValue),
             colorTo: p.color("#000000"),
             axis: Axis.Y
         }
-        this.objects.push(new LinearGradient(skyboxAttribs,
-            new Vector(
-                -0,
-                -1500,
-                -this.minTreeZ - this.maxTreeZOffset
+        let skyboxTranslateZ = -this.minTreeZ - this.maxTreeZOffset;
+        for (let orientY = 2; orientY >= -1; --orientY) {
+            this.objects.push(new LinearGradient(skyboxAttribs,
+                skyboxTranslateZ,
+                orientY * p.PI / 2
             ))
-        )
+        }
 
         // Trees.
         // TODO(Natalie): Extend drawing to left and right of the initial camera.
+        // TODO(Natalie): Prevent re-calculation of pseudo-random attributes on
+        // resize.
         let translations: Vector[] = [];
         for (let orientZ = 1; orientZ >= -1; orientZ -= 2) {
             for (let orientX = 1; orientX >= -1; orientX -= 2) {
