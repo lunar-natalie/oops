@@ -7,7 +7,6 @@ import { Text } from "./text";
 import Drawable from "./drawable";
 
 import p5, { Font, Vector } from "p5";
-import { ColorRGB } from "./color";
 
 /**
  * Canvas handler.
