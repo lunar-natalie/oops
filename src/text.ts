@@ -1,4 +1,4 @@
-import ColorAttributes from "./color";
+import { ColorRGBA } from "./color";
 import Drawable from "./drawable";
 
 import p5, { Font } from "p5";
@@ -9,7 +9,7 @@ export interface TextAttributes {
     startX: number;
     startY: number;
     size: number;
-    fillColorAttribs: ColorAttributes;
+    fillColorAttribs: ColorRGBA;
 }
 
 export class Text implements Drawable {

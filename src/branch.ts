@@ -1,4 +1,4 @@
-import ColorAttributes from "./color";
+import { ColorRGBA } from "./color";
 import Drawable from "./drawable";
 
 import p5, { Vector } from "p5";
@@ -20,10 +20,10 @@ export interface BranchAttributes {
     minLength: number;
 
     /** Color to fill the cylinder representing the branch with. */
-    colorAttribs: ColorAttributes;
+    colorAttribs: ColorRGBA;
 
     /** Color to fill children of a certain length and below with. */
-    altColorAttribs?: ColorAttributes;
+    altColorAttribs?: ColorRGBA;
     minLengthAltColor?: number;
 
     /**
@@ -103,7 +103,7 @@ export class Branch implements Drawable {
 
         // Draw current branch.
         p.noStroke();
-        let colorAttribs: ColorAttributes;
+        let colorAttribs: ColorRGBA;
         if (this.attribs.altColorAttribs && this.attribs.minLengthAltColor
             && this.attribs.length <= this.attribs.minLengthAltColor) {
             colorAttribs = this.attribs.altColorAttribs

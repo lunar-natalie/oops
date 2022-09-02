@@ -1,4 +1,4 @@
-import ColorAttributes from "./color";
+import { ColorRGBA } from "./color";
 import Drawable from "./drawable";
 
 import p5, { Vector } from "p5";
@@ -8,7 +8,7 @@ import p5, { Vector } from "p5";
  */
 export interface GroundAttributes {
     /** Fill color. */
-    colorAttribs: ColorAttributes;
+    colorAttribs: ColorRGBA;
 
     width: number;
     length: number;

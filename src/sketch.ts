@@ -2,10 +2,12 @@ import { Axis } from "./axis";
 import { Branch } from "./branch";
 import { Ground } from "./ground";
 import { LinearGradient, LinearGradientAttributes } from "./gradient";
+import { Sun } from "./sun";
 import { Text } from "./text";
 import Drawable from "./drawable";
 
 import p5, { Font, Vector } from "p5";
+import { ColorRGB } from "./color";
 
 /**
  * Canvas handler.
@@ -115,6 +117,24 @@ export default class Sketch {
             ))
         }
 
+        // Sun.
+        let sunRadius = 400;
+        this.objects.push(new Sun({
+            radius: sunRadius,
+            translation: new Vector(
+                (4 * sunRadius) - (skyboxWidth / 2),
+                -(p.height + (2 * sunRadius)),
+                sunRadius - (this.minTreeZ + this.maxTreeZOffset)
+            ),
+            fillColorAttribs: { red: 255, green: 217, blue: 154 },
+            lightPosition: new Vector(
+                0,
+                -p.height / 2,
+                0),
+            lightColorAttribs: { red: 255, green: 255, blue: 255 },
+            frontlightColorAttribs: { red: 255, green: 255, blue: 255 }
+        }));
+
         // Trees.
         // TODO(Natalie): Extend drawing to left and right of the initial camera.
         // TODO(Natalie): Prevent re-calculation of pseudo-random attributes on
@@ -158,6 +178,8 @@ export default class Sketch {
                 }
             }
         }
+
+        // TODO(Natalie): Animated clouds.
     }
 
     /**
@@ -176,9 +198,6 @@ export default class Sketch {
         this.objects.forEach(function (object, _index, _array): void {
             object.draw(p);
         });
-
-        // TODO(Natalie): Animated clouds.
-        // TODO(Natalie): Lighting.
     }
 
     /**
