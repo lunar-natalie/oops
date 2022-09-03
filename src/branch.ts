@@ -110,7 +110,8 @@ export class Branch implements Drawable {
         } else {
             colorAttribs = this.attribs.colorAttribs;
         }
-        p.fill(colorAttribs.red, colorAttribs.green, colorAttribs.blue, colorAttribs.alpha);
+        p.fill(colorAttribs.red, colorAttribs.green, colorAttribs.blue,
+            colorAttribs.alpha);
         p.cylinder(this.attribs.radius, this.attribs.length);
 
         if (this.children.length > 1) {
