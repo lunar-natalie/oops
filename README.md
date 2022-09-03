@@ -115,6 +115,6 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 Written by Natalie Wiggins.
 
-Various assets and public domain resources are exempt from this license.
+Static fonts are held under a different license (see [`static/fonts/noto/LICENSE`](static/fonts/noto/LICENSE)).
 
 See `LICENSE` and `AUTHORS` for more information.
