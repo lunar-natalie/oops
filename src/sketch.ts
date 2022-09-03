@@ -1,5 +1,6 @@
 import { Axis } from "./axis";
 import { Branch } from "./branch";
+import { Cloud } from "./cloud";
 import { Ground } from "./ground";
 import { LinearGradient, LinearGradientAttributes } from "./gradient";
 import { Sun } from "./sun";
@@ -15,13 +16,12 @@ export default class Sketch {
     /** Pre-configured objects to be drawn on the canvas. */
     objects: Drawable[];
 
-    minTreeZ = 200;
-    maxTreeZOffset: number;
-
     titleFont: Font;
     normalFont: Font;
 
-    backgroundColorValue = "#644063";
+    backgroundColorValue = "#696490";
+    minTreeZ = 200;
+    maxTreeZOffset: number;
 
     /**
      * Sets the preload(), setup(), and draw() methods on a p5 instance.
@@ -58,7 +58,7 @@ export default class Sketch {
         this.objects = [];
 
         // Title.
-        // TODO(Natalie): Properly horizontally center text.
+        // TODO(Natalie): Improve horizontal centering of text.
         let titleContent = "Welcome to Antheia";
         let titleSize = p.height / 20;
         let titleStartX = (-titleContent.length * titleSize) / 4;
@@ -77,7 +77,7 @@ export default class Sketch {
             startX: titleStartX,
             startY: titleStartY,
             size: titleSize,
-            fillColorAttribs: {red: 255, green: 255, blue: 255}
+            fillColorAttribs: { red: 255, green: 255, blue: 255 }
         }));
         this.objects.push(new Text({
             content: subtitleContent,
@@ -85,7 +85,7 @@ export default class Sketch {
             startX: subtitleStartX,
             startY: subtitleStartY,
             size: subtitleSize,
-            fillColorAttribs: {red: 255, green: 255, blue: 255}
+            fillColorAttribs: { red: 255, green: 255, blue: 255 }
         }));
         this.objects.push(new Text({
             content: labelContent,
@@ -100,7 +100,7 @@ export default class Sketch {
         let groundWidthLength = 2 * (this.minTreeZ + this.maxTreeZOffset);
         let groundDepth = 100;
         this.objects.push(new Ground({
-            colorAttribs: { red: 10, green: 50, blue: 10 },
+            fillColorAttribs: { red: 10, green: 50, blue: 10 },
             translation: new Vector(
                 0,
                 p.height / 2
@@ -131,6 +131,7 @@ export default class Sketch {
         }
 
         // Sun.
+        // TODO(Natalie): Improve lighting.
         let sunRadius = 400;
         this.objects.push(new Sun({
             radius: sunRadius,
@@ -144,22 +145,22 @@ export default class Sketch {
                 0,
                 -p.height / 2,
                 0),
-            lightColorAttribs: { red: 255, green: 255, blue: 255 },
-            frontlightColorAttribs: { red: 255, green: 255, blue: 255 }
+            lightColorAttribs: { red: 255, green: 255, blue: 255 }
+            // frontlightColorAttribs: { red: 255, green: 255, blue: 255 }
         }));
 
         // Trees.
         // TODO(Natalie): Extend drawing to left and right of the initial camera.
         // TODO(Natalie): Prevent re-calculation of pseudo-random attributes on
         // resize.
-        let translations: Vector[] = [];
-        for (let orientZ = 1; orientZ >= -1; orientZ -= 2) {
+        for (let translations: Vector[] = [],
+            orientZ = 1; orientZ >= -1; orientZ -= 2) {
             for (let orientX = 1; orientX >= -1; orientX -= 2) {
                 for (let i = 0; i < 10;) {
                     let trunkHeight =
                         100 + (Math.random() * 200);
                     let baseTranslateZ =
-                        200 + (Math.random() * this.maxTreeZOffset);
+                        this.minTreeZ + (Math.random() * this.maxTreeZOffset);
 
                     let translation = new Vector(
                         orientX * ((Math.random() - 0.5) * p.width * 2),
@@ -192,7 +193,35 @@ export default class Sketch {
             }
         }
 
-        // TODO(Natalie): Animated clouds.
+        // Clouds.
+        // TODO(Natalie): Extend drawing to left and right of the initial camera.
+        for (let translations: Vector[] = [],
+            orientZ = 1; orientZ >= -1; orientZ -= 2) {
+            for (let orientX = 1; orientX >= -1; orientX -= 2) {
+                for (let i = 0; i < 10;) {
+                    let baseWidth = 100 + (1 + Math.random());
+                    let translation = new Vector(
+                        orientX * (Math.random() * p.width * 2),
+                        -(p.height * 2) - (Math.random() * baseWidth ** 2),
+                        orientZ * skyboxTranslateZ
+                    );
+
+                    if (translations.indexOf(translation) != -1)
+                        continue;
+                    translations.push(translation);
+
+                    this.objects.push(new Cloud({
+                        baseWidth: baseWidth,
+                        segments: 4,
+                        fillColorAttribs: { red: 255, green: 255, blue: 255, alpha: 255 },
+                        translation: translation,
+                        xAnimationDivisor: 1000 * (1 + Math.random())
+                    }));
+
+                    ++i;
+                }
+            }
+        }
     }
 
     /**

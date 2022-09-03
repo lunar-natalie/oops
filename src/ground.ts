@@ -8,7 +8,7 @@ import p5, { Vector } from "p5";
  */
 export interface GroundAttributes {
     /** Fill color. */
-    colorAttribs: ColorRGBA;
+    fillColorAttribs: ColorRGBA;
 
     width: number;
     length: number;
@@ -41,10 +41,10 @@ export class Ground implements Drawable {
         p.push();
 
         p.noStroke();
-        p.fill(this.attribs.colorAttribs.red,
-            this.attribs.colorAttribs.green,
-            this.attribs.colorAttribs.blue,
-            this.attribs.colorAttribs.alpha);
+        p.fill(this.attribs.fillColorAttribs.red,
+            this.attribs.fillColorAttribs.green,
+            this.attribs.fillColorAttribs.blue,
+            this.attribs.fillColorAttribs.alpha);
         p.translate(this.attribs.translation);
         p.box(this.attribs.width, this.attribs.depth, this.attribs.length);
 

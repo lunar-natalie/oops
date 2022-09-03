@@ -1,7 +1,7 @@
 # Antheia
 
-A web-based graphical demo with a theme of an animated garden **(TODO)**, using
-[TypeScript](https://www.typescriptlang.org/) and [p5.js](https://p5js.org/).
+A web-based graphical demo with a theme of a pseudo-randomly generated, animated
+garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://p5js.org/).
 
 ## Table of contents
 
@@ -16,6 +16,7 @@ A web-based graphical demo with a theme of an animated garden **(TODO)**, using
     * [Debugging](#debugging)
         * [Additional dependencies](#additional-dependencies)
         * [VS Code](#vs-code-1)
+    * [Known issues](#known-issues)
     * [License](#license)
 
 ## Documentation
@@ -67,6 +68,14 @@ yarn install && yarn serve
 
 * Run the default launch task (`Launch Chrome against localhost`)
     * Default keybind: `F5`
+
+## Known issues
+
+* Low framerate
+* Browser crashes may occur, as drawing fractals with global lighting is
+  difficult to optimize in WebGL
+* Skybox corners fail to render depending on the camera angle
+* Tree branches intersect
 
 ## License
 
