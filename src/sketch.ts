@@ -195,6 +195,8 @@ export default class Sketch {
 
         // Clouds.
         // TODO(Natalie): Extend drawing to left and right of the initial camera.
+        // TODO(Natalie): Fix lighting on clouds transformed on the positive
+        // z-axis.
         for (let translations: Vector[] = [],
             orientZ = 1; orientZ >= -1; orientZ -= 2) {
             for (let orientX = 1; orientX >= -1; orientX -= 2) {
