@@ -6,18 +6,18 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 ## Table of contents
 
 * [Antheia](#antheia)
-    * [Table of contents](#table-of-contents)
-    * [Documentation](#documentation)
-    * [Development dependencies](#development-dependencies)
-    * [Building and running the server](#building-and-running-the-server)
-        * [Standalone](#standalone)
-        * [VS Code](#vs-code)
-    * [Code structure](#code-structure)
-    * [Debugging](#debugging)
-        * [Additional dependencies](#additional-dependencies)
-        * [VS Code](#vs-code-1)
-    * [Known issues](#known-issues)
-    * [License](#license)
+  * [Table of contents](#table-of-contents)
+  * [Documentation](#documentation)
+  * [Development dependencies](#development-dependencies)
+  * [Building and running the server](#building-and-running-the-server)
+    * [Standalone](#standalone)
+    * [VS Code](#vs-code)
+  * [Code structure](#code-structure)
+  * [Debugging](#debugging)
+    * [Additional dependencies](#additional-dependencies)
+    * [VS Code](#vs-code-1)
+  * [Known issues](#known-issues)
+  * [License](#license)
 
 ## Documentation
 
@@ -72,10 +72,10 @@ yarn install && yarn serve
 ## Known issues
 
 * Low framerate
-* Browser crashes may occur, as drawing fractals with global lighting is
-  difficult to optimize in WebGL
+* Browser crashes may occur when continuously building and debugging, as drawing
+  fractals with global lighting is difficult to optimize in WebGL
 * Skybox corners fail to render depending on the camera angle
-* Tree branches intersect
+* Tree branches intersect and have attribute-dependent reliability
 
 ## License
 
