@@ -7,11 +7,22 @@ import p5, { Font } from "p5";
  * Attributes for drawable text.
  */
 export interface TextAttributes {
+    /** Text content to be displayed. */
     content: string;
+
+    /** Font with which to draw text. */
     font: Font;
+
+    /** x-coordinate at which to start drawing. */
     startX: number;
+
+    /** y-coordinate at which to start drawing. */
     startY: number;
+
+    /** Font size in pixels. */
     size: number;
+
+    /** Text color. */
     fillColorAttribs: ColorRGBA;
 }
 
