@@ -1,7 +1,6 @@
 # Antheia
 
 <img src="assets/icon.png" alt="Icon" width="100">
-<br><br>
 
 A web-based graphical demo with a theme of a pseudo-randomly generated, animated
 garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://p5js.org/).
