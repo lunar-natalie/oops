@@ -127,7 +127,7 @@ export default class Sketch {
             this.objects.push(new LinearGradient(skyboxAttribs,
                 skyboxTranslateZ,
                 orientY * p.PI / 2
-            ))
+            ));
         }
 
         // Sun.
