@@ -44,8 +44,8 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 
 ## Building and running the server
 
-The server will run on http://localhost:8080. This page is accessible via a web
-browser; supported browsers are [Chromium](https://www.chromium.org/Home/)
+The local server runs on http://localhost:8080. This page is accessible via a
+web browser; supported browsers are [Chromium](https://www.chromium.org/Home/)
 (version 100 and newer) and [Mozilla Firefox](https://www.mozilla.org/en-GB/firefox/)
 (version 100 and newer).
 
@@ -74,7 +74,7 @@ yarn install && yarn serve
 
 ### Additional dependencies
 
-* `chromium`
+* `chromium` >= 100
 
 ### VS Code
 
@@ -93,6 +93,9 @@ yarn install && yarn serve
   incorrectly lit.
 
 ## Demo
+
+***Note:** This screen capture was exported at a lower framerate than when run
+in a browser.*
 
 ![Screen Capture](demo/capture.gif)
 
