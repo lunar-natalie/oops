@@ -213,7 +213,10 @@ export default class Sketch {
                     this.objects.push(new Cloud({
                         baseWidth: baseWidth,
                         segments: 4,
-                        fillColorAttribs: { red: 255, green: 255, blue: 255, alpha: 255 },
+                        fillColorAttribs: {
+                            red: 255, green: 255, blue: 255,
+                            alpha: 255
+                        },
                         translation: translation,
                         xAnimationDivisor: 1000 * (1 + Math.random())
                     }));
