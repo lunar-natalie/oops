@@ -88,6 +88,9 @@ yarn install && yarn serve
   fractals with global lighting is difficult to optimize in WebGL.
 * Skybox corners don't fully render depending on the camera angle.
 * Tree branches intersect and have attribute-dependent reliability.
+* Welcome title is not precicely horizontally centered.
+* Clouds transformed positively on the axis (behind the initial camera) are
+  incorrectly lit.
 
 ## Demo
 
