@@ -4,7 +4,7 @@ import Drawable from "./drawable";
 import p5, { Vector } from "p5";
 
 /**
- * Attributes for drawable and animated clouds.
+ * Attributes for a drawable and animated cloud.
  */
 export interface CloudAttributes {
     /** Width of the ellipsis for the first segment. */

@@ -1,7 +1,7 @@
 import { Axis } from "./axis";
 import Drawable from "./drawable";
 
-import p5, { Color, Vector } from "p5";
+import p5, { Color } from "p5";
 
 /**
  * Attributes for drawing a linear gradient.

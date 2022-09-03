@@ -4,7 +4,7 @@ import Drawable from "./drawable";
 import p5, { Vector } from "p5";
 
 /**
- * Attributes for the drawable ground plane.
+ * Attributes for a drawable ground plane.
  */
 export interface GroundAttributes {
     /** Fill color. */

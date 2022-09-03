@@ -4,7 +4,7 @@ import Drawable from "./drawable";
 import p5, { Vector } from "p5";
 
 /**
- * Attrbutes for the drawable sun object.
+ * Attrbutes for a drawable sun object.
  */
 export interface SunAttributes {
     /** Radius of the sphere representing the sun. */
