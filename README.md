@@ -8,6 +8,7 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 * [Antheia](#antheia)
   * [Table of contents](#table-of-contents)
   * [Documentation](#documentation)
+  * [Features](#features)
   * [Development dependencies](#development-dependencies)
   * [Building and running the server](#building-and-running-the-server)
     * [Standalone](#standalone)
@@ -21,10 +22,18 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 
 ## Documentation
 
-* POSIX shell commands to be run as user are denoted by shell code blocks
-* 'Visual Studio Code' and 'Code - OSS' are abbreviated to VS Code
+* POSIX shell commands to be run as user are denoted by shell code blocks.
+* 'Visual Studio Code' and 'Code - OSS' are abbreviated to VS Code.
 * Documentation and code symbols are written in United States English in order
-  to adhere to international standards and frameworks
+  to adhere to international standards and frameworks.
+
+## Features
+
+* Pseudo-3D, pseudo-randomly generated fractal trees on a 3D ground plane.
+* Animated clouds.
+* Gradient skybox.
+* Light sources.
+* Extensible object-oriented drawing framework.
 
 ## Development dependencies
 
@@ -50,13 +59,13 @@ yarn install && yarn serve
 
 ## Code structure
 
-* Written in TypeScript, HTML, and CSS
-* Built and run using [Yarn](https://yarnpkg.com/) and [Parcel](https://parceljs.org/)
-* Lines are no longer than 80 characters, unless readability is affected
+* Written in TypeScript, HTML, and CSS.
+* Built and run using [Yarn](https://yarnpkg.com/) and [Parcel](https://parceljs.org/).
+* Lines are no longer than 80 characters, unless readability is affected.
 * Tab width is 4 spaces, excluding generated files such as `package.json` in
-  which the default of a given tool is used
-* Source code is located in `src/`
-* Uses [JSDoc](https://jsdoc.app/) comments
+  which the default of a given tool is used.
+* Source code is located in `src/`.
+* Uses [JSDoc](https://jsdoc.app/) comments.
 
 ## Debugging
 
@@ -71,11 +80,11 @@ yarn install && yarn serve
 
 ## Known issues
 
-* Low framerate
+* Low framerate.
 * Browser crashes may occur when continuously building and debugging, as drawing
-  fractals with global lighting is difficult to optimize in WebGL
-* Skybox corners fail to render depending on the camera angle
-* Tree branches intersect and have attribute-dependent reliability
+  fractals with global lighting is difficult to optimize in WebGL.
+* Skybox corners don't fully render depending on the camera angle.
+* Tree branches intersect and have attribute-dependent reliability.
 
 ## License
 
