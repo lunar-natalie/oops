@@ -91,6 +91,7 @@ yarn install && yarn serve
 * Welcome title is not precicely horizontally centered.
 * Clouds transformed positively on the axis (behind the initial camera) are
   incorrectly lit.
+* Canvas objects are placed below the top of the ground plane on the y-axis.
 
 ## Demo
 
