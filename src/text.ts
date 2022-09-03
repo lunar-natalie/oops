@@ -3,6 +3,9 @@ import Drawable from "./drawable";
 
 import p5, { Font } from "p5";
 
+/**
+ * Attributes for drawable text.
+ */
 export interface TextAttributes {
     content: string;
     font: Font;
@@ -12,13 +15,25 @@ export interface TextAttributes {
     fillColorAttribs: ColorRGBA;
 }
 
+/**
+ * Drawable canvas text object.
+ */
 export class Text implements Drawable {
     readonly attribs: TextAttributes;
 
+    /**
+     * Creates a new text object.
+     * @param attribs Attributes for drawing.
+     */
     constructor(attribs: TextAttributes) {
         this.attribs = attribs;
     }
 
+    /**
+     * Draws text in the font specified in the attributes. Preserves drawing
+     * configuration and transformations.
+     * @param p p5 instance.
+     */
     draw(p: p5): void {
         p.push();
 
