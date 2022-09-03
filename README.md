@@ -9,8 +9,8 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 
 * [Antheia](#antheia)
   * [Table of contents](#table-of-contents)
-  * [Documentation](#documentation)
   * [Features](#features)
+  * [Documentation](#documentation)
   * [Development dependencies](#development-dependencies)
   * [Building and running the server](#building-and-running-the-server)
     * [Standalone](#standalone)
@@ -23,13 +23,6 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
   * [Demo](#demo)
   * [License](#license)
 
-## Documentation
-
-* POSIX shell commands to be run as user are denoted by shell code blocks.
-* 'Visual Studio Code' and 'Code - OSS' are abbreviated to VS Code.
-* Documentation and code symbols are written in United States English in order
-  to adhere to international standards and frameworks.
-
 ## Features
 
 * Pseudo-3D, pseudo-randomly generated fractal trees on a 3D ground plane.
@@ -37,6 +30,13 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 * Gradient skybox.
 * Light sources.
 * Extensible object-oriented drawing framework.
+
+## Documentation
+
+* POSIX shell commands to be run as user are denoted by shell code blocks.
+* 'Visual Studio Code' and 'Code - OSS' are abbreviated to VS Code.
+* Documentation and code symbols are written in United States English in order
+  to adhere to international standards and frameworks.
 
 ## Development dependencies
 
