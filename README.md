@@ -1,5 +1,8 @@
 # Antheia
 
+<img src="assets/icon.png" alt="Icon" width="100">
+<br><br>
+
 A web-based graphical demo with a theme of a pseudo-randomly generated, animated
 garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://p5js.org/).
 
@@ -18,6 +21,7 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
     * [Additional dependencies](#additional-dependencies)
     * [VS Code](#vs-code-1)
   * [Known issues](#known-issues)
+  * [Demo](#demo)
   * [License](#license)
 
 ## Documentation
@@ -85,6 +89,10 @@ yarn install && yarn serve
   fractals with global lighting is difficult to optimize in WebGL.
 * Skybox corners don't fully render depending on the camera angle.
 * Tree branches intersect and have attribute-dependent reliability.
+
+## Demo
+
+![Screen Capture](demo/capture.gif)
 
 ## License
 
