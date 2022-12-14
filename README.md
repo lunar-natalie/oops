@@ -25,7 +25,7 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 
 ## Features
 
-* Pseudo-3D, pseudo-randomly generated fractal trees on a 3D ground plane.
+* 3D, pseudo-randomly generated fractal trees on a 3D ground plane.
 * Animated clouds.
 * Gradient skybox.
 * Light sources.
