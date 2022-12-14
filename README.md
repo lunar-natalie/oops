@@ -12,9 +12,12 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
   * [Features](#features)
   * [Documentation](#documentation)
   * [Development dependencies](#development-dependencies)
-  * [Building and running the server](#building-and-running-the-server)
+  * [Development server](#development-server)
     * [Standalone](#standalone)
     * [VS Code](#vs-code)
+  * [Production server](#production-server)
+    * [Configuration](#configuration)
+    * [Building](#building)
   * [Code structure](#code-structure)
   * [Debugging](#debugging)
     * [Additional dependencies](#additional-dependencies)
@@ -42,7 +45,7 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
 
 - `yarn`
 
-## Building and running the server
+## Development server
 
 The local server runs on http://localhost:8080. This page is accessible via a
 web browser; supported browsers are [Chromium](https://www.chromium.org/Home/)
@@ -59,6 +62,21 @@ yarn install && yarn serve
 
 * Run Build Task (`Start development environment`)
     * Default keybind: `shift + ctrl/cmd + b`
+
+## Production server
+
+### Configuration
+
+To host a production server, build and serve `dist/` as the server root or as an
+[Apache](https://apache.org/)-served directory. If the directory is not the
+server root, set the `PUBLIC_PREFIX` environment variable to the location of the
+subdirectory in which the site's files will reside, relative to the server root.
+
+### Building
+
+```shell
+yarn install && yarn build
+```
 
 ## Code structure
 

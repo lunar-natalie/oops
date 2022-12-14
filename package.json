@@ -7,10 +7,22 @@
   "license": "GPL-3.0",
   "private": false,
   "source": "src/index.html",
+  "engines": {
+    "node": ">=18"
+  },
+  "targets": {
+    "default": {
+      "engines": {
+        "browsers": ">= 50%"
+      }
+    }
+  },
   "scripts": {
-    "serve": "parcel --port 8080"
+    "serve": "node build.js serve",
+    "build": "node build.js build"
   },
   "devDependencies": {
+    "@types/node": "^18.11.9",
     "@types/p5": "^1.4.2",
     "parcel": "^2.7.0",
     "parcel-reporter-static-files-copy": "^1.4.0"

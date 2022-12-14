@@ -3,16 +3,12 @@
     "tasks": [
         {
             "label": "Start development environment",
-            "detail": "Updates packages and runs the server",
+            "detail": "Updates packages and runs the development server",
             "dependsOn": [
                 "Update packages",
-                "Run server"
+                "Start development server"
             ],
-            "dependsOrder": "sequence",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "dependsOrder": "sequence"
         },
         {
             "label": "Update packages",
@@ -23,12 +19,16 @@
             ]
         },
         {
-            "label": "Run server",
+            "label": "Start development server",
             "type": "shell",
             "command": "yarn",
             "args": [
                 "serve"
-            ]
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
