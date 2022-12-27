@@ -1,8 +1,8 @@
 {
-  "name": "antheia",
+  "name": "oops",
   "version": "1.0.0",
-  "description": "A graphical garden",
-  "repository": "git@github.com:lunar-natalie/antheia.git",
+  "description": "A graphical demo",
+  "repository": "git@github.com:lunar-natalie/oops.git",
   "author": "Natalie Wiggins <islifepeachy@outlook.com>",
   "license": "GPL-3.0",
   "private": false,
