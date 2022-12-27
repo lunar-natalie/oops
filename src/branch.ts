@@ -112,7 +112,7 @@ export class Branch implements Drawable {
         }
         p.fill(colorAttribs.red, colorAttribs.green, colorAttribs.blue,
             colorAttribs.alpha);
-        p.cylinder(this.attribs.radius, this.attribs.length);
+        p.sphere((this.attribs.radius + this.attribs.length) / 4);
 
         if (this.children.length > 1) {
             // Draw children.
