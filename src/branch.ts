@@ -1,7 +1,7 @@
 import { ColorRGBA } from "./color";
 import Drawable from "./drawable";
 
-import p5, { Vector } from "p5";
+import p5, { Image, Vector } from "p5";
 
 /**
  * Attributes for drawable branches.
@@ -18,13 +18,6 @@ export interface BranchAttributes {
      * length has been reached.
      */
     minLength: number;
-
-    /** Color to fill the cylinder representing the branch with. */
-    colorAttribs: ColorRGBA;
-
-    /** Color to fill children of a certain length and below with. */
-    altColorAttribs?: ColorRGBA;
-    minLengthAltColor?: number;
 
     /**
      * Angle to deviate from the previously drawn branch by, in p5's current
@@ -43,10 +36,15 @@ export interface BranchAttributes {
      * next.
      */
     radiusMultiplier?: number;
+
+    /**
+     * Image to apply to each shape.
+     */
+    texture: Image;
 }
 
 /**
- * Drawable canvas object represented by a cylinder and its children.
+ * Drawable canvas object represented by a sphere and its children.
  */
 export class Branch implements Drawable {
     readonly attribs: BranchAttributes;
@@ -103,16 +101,12 @@ export class Branch implements Drawable {
 
         // Draw current branch.
         p.noStroke();
-        let colorAttribs: ColorRGBA;
-        if (this.attribs.altColorAttribs && this.attribs.minLengthAltColor
-            && this.attribs.length <= this.attribs.minLengthAltColor) {
-            colorAttribs = this.attribs.altColorAttribs
-        } else {
-            colorAttribs = this.attribs.colorAttribs;
-        }
-        p.fill(colorAttribs.red, colorAttribs.green, colorAttribs.blue,
-            colorAttribs.alpha);
-        p.sphere((this.attribs.radius + this.attribs.length) / 4);
+
+        p.textureWrap(p.REPEAT);
+        p.texture(this.attribs.texture);
+
+        p.sphere(this.attribs.radius);
+        p.translate(0, -(this.attribs.radius / 4));
 
         if (this.children.length > 1) {
             // Draw children.

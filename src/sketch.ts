@@ -7,7 +7,7 @@ import { Sun } from "./sun";
 import { Text } from "./text";
 import Drawable from "./drawable";
 
-import p5, { Font, Vector } from "p5";
+import p5, { Font, Image, Vector } from "p5";
 
 /**
  * Canvas handler.
@@ -20,8 +20,11 @@ export default class Sketch {
     normalFont: Font;
 
     backgroundColorValue = "#696490";
-    minTreeZ = 200;
+    minTreeZ = 500;
     maxTreeZOffset: number;
+
+    branchImage: Image;
+    sunImage: Image;
 
     /**
      * Sets the preload(), setup(), and draw() methods on a p5 instance.
@@ -36,6 +39,8 @@ export default class Sketch {
     private preload(p: p5): void {
         this.titleFont = p.loadFont("fonts/noto/NotoSansMono-Bold.ttf");
         this.normalFont = p.loadFont("fonts/noto/NotoSansMono-Regular.ttf");
+        this.branchImage = p.loadImage("images/britney.png");
+        this.sunImage = p.loadImage("images/korn_logo.png");
     }
 
     /**
@@ -46,7 +51,7 @@ export default class Sketch {
     private setup(p: p5): void {
         p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
         window.onresize = () => this.onresize(p);
-        this.maxTreeZOffset = p.height * 6;
+        this.maxTreeZOffset = p.height * 4;
         this.createObjects(p);
     }
 
@@ -140,13 +145,12 @@ export default class Sketch {
                 -(p.height + (2 * sunRadius)),
                 sunRadius - (this.minTreeZ + this.maxTreeZOffset)
             ),
-            fillColorAttribs: { red: 255, green: 217, blue: 154 },
             lightPosition: new Vector(
                 0,
                 -p.height / 2,
                 0),
-            lightColorAttribs: { red: 255, green: 255, blue: 255 }
-            // frontlightColorAttribs: { red: 255, green: 255, blue: 255 }
+            lightColorAttribs: { red: 255, green: 255, blue: 255 },
+            texture: this.sunImage
         }));
 
         // Trees.
@@ -156,7 +160,7 @@ export default class Sketch {
         for (let translations: Vector[] = [],
             orientZ = 1; orientZ >= -1; orientZ -= 2) {
             for (let orientX = 1; orientX >= -1; orientX -= 2) {
-                for (let i = 0; i < 10;) {
+                for (let i = 0; i < 5;) {
                     let trunkHeight =
                         100 + (Math.random() * 200);
                     let baseTranslateZ =
@@ -173,19 +177,13 @@ export default class Sketch {
                     translations.push(translation);
 
                     this.objects.push(new Branch({
-                        radius: 4 + (Math.random() * 2),
+                        radius: 50 * (1 + Math.random()),
                         length: trunkHeight,
                         minLength: 4 + (baseTranslateZ * 0.01),
-                        colorAttribs: { red: 200, green: 200, blue: 200 },
-                        altColorAttribs: {
-                            red: 200 + Math.random() * 55,
-                            green: 0,
-                            blue: 200 + Math.random() * 55
-                        },
-                        minLengthAltColor: 10 + (Math.random() * 70),
                         angleDeviation: p.PI / (3 + (Math.random() * 8)),
                         lengthMultiplier: 2 / 3,
-                        radiusMultiplier: 2 / 3
+                        radiusMultiplier: 2 / 3,
+                        texture: this.branchImage
                     }, translation));
 
                     ++i;
