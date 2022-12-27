@@ -8,7 +8,11 @@
                 "Update packages",
                 "Start development server"
             ],
-            "dependsOrder": "sequence"
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "Update packages",
@@ -24,11 +28,7 @@
             "command": "yarn",
             "args": [
                 "serve"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            ]
         }
     ]
 }
