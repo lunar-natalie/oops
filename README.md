@@ -1,13 +1,16 @@
-# Antheia
+# oops
 
 <img src="assets/icon.png" alt="Icon" width="100">
 
-A web-based graphical demo with a theme of a pseudo-randomly generated, animated
-garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://p5js.org/).
+Object Oriented Programming Scene (I did it again).
+
+An object-oriented web-based graphical demo with a theme of a space-like
+randomly generated, scene, using [TypeScript](https://www.typescriptlang.org/)
+and [p5.js](https://p5js.org/).
 
 ## Table of contents
 
-* [Antheia](#antheia)
+* [oops](#oops)
   * [Table of contents](#table-of-contents)
   * [Features](#features)
   * [Documentation](#documentation)
@@ -23,7 +26,6 @@ garden, using [TypeScript](https://www.typescriptlang.org/) and [p5.js](https://
     * [Additional dependencies](#additional-dependencies)
     * [VS Code](#vs-code-1)
   * [Known issues](#known-issues)
-  * [Demo](#demo)
   * [License](#license)
 
 ## Features
@@ -110,13 +112,6 @@ yarn install && yarn build
 * Clouds transformed positively on the axis (behind the initial camera) are
   incorrectly lit.
 * Canvas objects are placed below the top of the ground plane on the y-axis.
-
-## Demo
-
-***Note:** This screen capture was exported at a lower framerate than when run
-in a browser.*
-
-![Screen Capture](demo/capture.gif)
 
 ## License
 
