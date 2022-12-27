@@ -59,11 +59,11 @@ export default class Sketch {
 
         // Title.
         // TODO(Natalie): Improve horizontal centering of text.
-        let titleContent = "Welcome to Antheia";
+        let titleContent = "Welcome to oops";
         let titleSize = p.height / 20;
         let titleStartX = (-titleContent.length * titleSize) / 4;
         let titleStartY = titleSize - (p.height / 4);
-        let subtitleContent = "A graphical demo of a psuedo-randomly generated garden.";
+        let subtitleContent = "A graphical demo.";
         let subtitleSize = titleSize / 2;
         let subtitleStartX = (-subtitleContent.length * subtitleSize) / 4;
         let subtitleStartY = titleStartY + titleSize;
@@ -100,7 +100,7 @@ export default class Sketch {
         let groundWidthLength = 2 * (this.minTreeZ + this.maxTreeZOffset);
         let groundDepth = 100;
         this.objects.push(new Ground({
-            fillColorAttribs: { red: 10, green: 50, blue: 10 },
+            fillColorAttribs: { red: 40, green: 90, blue: 100 },
             translation: new Vector(
                 0,
                 p.height / 2
